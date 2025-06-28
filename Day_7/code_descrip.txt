@@ -1,0 +1,138 @@
+Sure! Let's go through the code **step by step** and explain what it does:
+
+---
+
+### 🧠 **Overall Goal**:
+
+This is a simple **word guessing game**, like **Hangman**. You try to guess the letters of a randomly chosen word. You lose a life for every incorrect guess. The game ends when you either:
+
+* guess the full word correctly (**you win**), or
+* run out of lives (**you lose**).
+
+---
+
+### 🔹 1. **Setup**
+
+```python
+import random
+lives = 5
+words = ["sivakumr", "dharsi", "dhanus"]
+chosen = random.choice(words)     # Randomly selects one word
+chosen_word = len(chosen)         # Gets the length of the selected word
+```
+
+* Picks a random word from the `words` list.
+* `chosen_word` stores how many letters are in that word.
+
+---
+
+### 🔹 2. **Create Placeholder**
+
+```python
+placeholder = ""
+for position in range(0, chosen_word):
+    placeholder += "_ "
+print(placeholder)
+```
+
+* Creates a blank line showing `_ _ _ _` for each letter in the word.
+* Example: if word is `"dharsi"` → prints: `_ _ _ _ _ _`
+
+---
+
+### 🔹 3. **Main Game Loop**
+
+```python
+game_over = False
+crtt_letter = []   # Stores correct letters guessed so far
+```
+
+Then enters a `while` loop that runs until `game_over = True`.
+
+---
+
+### 🔹 4. **Get User Input**
+
+```python
+guess = input("guess a letter:").lower()
+```
+
+* Asks the user to guess a letter.
+* Converts it to lowercase to avoid mismatch with uppercase letters.
+
+---
+
+### 🔹 5. **Build Display After Each Guess**
+
+```python
+display = ""
+
+for letter in chosen:
+    if letter == guess:
+        display += letter
+        crtt_letter.append(guess)
+    elif letter in crtt_letter:
+        display += letter
+    else:
+        display += "_ "
+```
+
+This part:
+
+* Loops through each letter in the chosen word.
+* If guessed letter is correct:
+  → adds that letter to `display` and adds it to `crtt_letter`.
+* If it was already guessed before:
+  → just shows it again.
+* If not guessed yet:
+  → adds "\_ " to show it’s still hidden.
+
+Then prints the current status of the word.
+
+---
+
+### 🔹 6. **Check Wrong Guess**
+
+```python
+if guess not in chosen:
+    lives -= 1
+    if lives == 0:
+        game_over = True
+        print("you lost")
+```
+
+* If the guessed letter is not in the word:
+  → subtract a life.
+* If `lives` becomes `0`:
+  → game ends and prints "you lost".
+
+---
+
+### 🔹 7. **Check Win Condition**
+
+```python
+if "_" not in display:
+    game_over = True
+    print("you won.")
+```
+
+* If there are **no more underscores**, it means the full word is guessed.
+* Ends the game and prints "you won."
+
+---
+
+### ⚠️ Issues in Code
+
+1. `crtt_letter.append(guess)` should **only be added once** (if guess is new and correct), not for every letter.
+2. `display += letter` when matched should not also add the letter to `crtt_letter` multiple times.
+3. The output might become messy (e.g., spacing) because `display += "_ "` adds spaces, but `display += letter` doesn’t.
+
+---
+
+### ✅ Fix suggestion:
+
+Move `crtt_letter.append(guess)` **outside the for loop**, and only add it if the guess is in the word but not already guessed.
+
+---
+
+Would you like me to rewrite the **fixed and clean version** of this game?
