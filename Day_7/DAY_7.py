@@ -1,3 +1,5 @@
+print("hey there this code belongs to day 7")
+
 import random
 
 lives = 5
