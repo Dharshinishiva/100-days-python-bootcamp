@@ -2,12 +2,15 @@ from menu import Menu
 from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
 
+# initializing the class or creating an object
 coffeemaker = CoffeeMaker()
 menu = Menu()
 moneymachine = MoneyMachine()
+
 game = True
 while game:
-    print(menu.get_items())
+    print("items", menu.get_items())
+
     order_name = input("what kind of coffee you want \n (espresso/latte/cappuccino):")
     if order_name == "off":
         game = False
