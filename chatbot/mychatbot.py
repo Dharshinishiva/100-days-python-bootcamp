@@ -105,3 +105,7 @@ for role, msg in st.session_state.chat_history:
         st.markdown(
             f'<div class="chat-message chat-bot">{msg}</div>', unsafe_allow_html=True
         )
+
+
+# how to run it
+# type in terminal- streamlit run filename.py
